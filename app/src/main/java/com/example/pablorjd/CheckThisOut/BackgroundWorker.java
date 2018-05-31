@@ -26,7 +26,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://10.20.13.31/checkthisout/login.php";//Para utilizar local host en ADB se debe usar esta IP
+        String login_url = "http://10.20.13.31/checkthisout/login.php";
         if (type.equals("login")){
             try {
                 String user_name = params[1];

@@ -56,5 +56,13 @@
         android:layout_height="397dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical">
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/tvTest"
+           android:textSize="20sp"/>
+
+    </LinearLayout>
 </RelativeLayout>

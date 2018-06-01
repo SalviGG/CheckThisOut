@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import com.example.pablorjd.CheckThisOut.fragments.HomeFragment;
+import com.example.pablorjd.CheckThisOut.fragments.SettingsFragment;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawer;

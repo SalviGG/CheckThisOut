@@ -1,16 +1,16 @@
-package com.example.pablorjd.CheckThisOut.interfaces;
+package com.example.pablorjd.CheckThisOut.api;
 
-import com.example.pablorjd.CheckThisOut.model.MovieResults;
+import com.example.pablorjd.CheckThisOut.model.TopRatedMovies;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface ApiInterface {
+public interface MovieService {
 
     @GET("/3/movie/{category}")
-    Call<MovieResults> getMovies(
+    Call<TopRatedMovies> getMovies(
             @Path("category") String category,
             @Query("api_key") String apiKey,
             @Query("language") String language,

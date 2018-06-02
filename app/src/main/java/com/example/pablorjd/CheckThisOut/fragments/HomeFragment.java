@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment{
 
     public static int PAGE = 1;
     public static String API_KEY = BuildConfig.ApiKey;
-    public static String LANGUAGE = "en-US";
+    public static String LANGUAGE = "es-CL";
     public static String CATEGORY = "top_rated";
 
     PaginationAdapter adapter;

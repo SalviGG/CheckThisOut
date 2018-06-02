@@ -1,5 +1,6 @@
 package com.example.pablorjd.CheckThisOut;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -54,7 +55,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
                 break;
             case R.id.log:
-                Toast.makeText(this,"share", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, Login.class );
+                startActivity(intent);
+                Toast.makeText(this,"Ha cerrado su sesión", Toast.LENGTH_SHORT).show();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

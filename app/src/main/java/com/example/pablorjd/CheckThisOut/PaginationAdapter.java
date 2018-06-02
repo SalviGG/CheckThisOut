@@ -28,7 +28,7 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private static final int ITEM = 0;
     private static final int LOADING = 1;
-    private static final String BASE_URL_IMG = "https://image.tmdb.org/t/p/w150";
+    private static final String BASE_URL_IMG = "https://api.themoviedb.org/3/movie/";
 
     private List<Result> movieResults;
     private Context context;
@@ -103,7 +103,6 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         .listener(new RequestListener<String, GlideDrawable>() {
                             @Override
                             public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                                // TODO: 08/11/16 handle failure
                                 movieVH.mProgress.setVisibility(View.GONE);
                                 return false;
                             }

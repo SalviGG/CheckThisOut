@@ -3,6 +3,7 @@ package com.example.pablorjd.CheckThisOut;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,7 +27,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://10.20.13.31/checkthisout/login.php";
+        String login_url = "http://192.168.64.2/checkthisout/login.php";
         if (type.equals("login")){
             try {
                 String user_name = params[1];
@@ -75,6 +76,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         alertDialog.setMessage(result);
         alertDialog.show();
     }
+
 
     @Override
     protected void onProgressUpdate(Void... values) {

@@ -32,9 +32,9 @@ public class Login extends AppCompatActivity {
         String type = "login";
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
         backgroundWorker.execute(type,username,password);
-        Intent intent = new Intent(Login.this, MainActivity.class );
+        /*Intent intent = new Intent(Login.this, MainActivity.class );
         startActivity(intent);
-        Toast.makeText(this,"Bienvenido", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Bienvenido", Toast.LENGTH_SHORT).show();*/
 
     }
 }

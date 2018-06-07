@@ -8,10 +8,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="114dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical">
+        android:layout_height="193dp"
+        android:orientation="horizontal">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -19,36 +17,50 @@
 
             <EditText
                 android:id="@+id/etBusqueda"
-                android:layout_width="211dp"
-                android:layout_height="36dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ems="10"
-                android:hint="Buscar"
-                android:inputType="textPersonName"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:hint="Busqueda"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.259" />
 
             <Button
                 android:id="@+id/btnBuscar"
-                android:layout_width="90dp"
-                android:layout_height="31dp"
+                android:layout_width="92dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/colorPrimary"
                 android:text="Buscar"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.511"
+                app:layout_constraintStart_toEndOf="@+id/etBusqueda"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.263" />
+
+            <TextView
+                android:id="@+id/tvPelisPop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="68dp"
+                android:text="Peliculas populares"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.025"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etBusqueda"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/etBusqueda" />
+
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
 
@@ -57,13 +69,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.suleiman.pagination.MainActivity">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Peliculas populares"
-            android:textSize="18sp" />
+        tools:context="com.example.pablorjd.CheckThisOut.MainActivity">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/main_recycler"
@@ -71,7 +77,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/activity_margin_content"
-            android:paddingTop="@dimen/activity_margin_content"/>
+            android:paddingTop="@dimen/activity_margin_content" />
 
         <ProgressBar
             android:id="@+id/main_progress"

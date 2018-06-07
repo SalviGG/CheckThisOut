@@ -1,12 +1,10 @@
 package com.example.pablorjd.CheckThisOut;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
@@ -30,11 +28,8 @@ public class Login extends AppCompatActivity {
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
         String type = "login";
-        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute(type,username,password);
-        /*Intent intent = new Intent(Login.this, MainActivity.class );
-        startActivity(intent);
-        Toast.makeText(this,"Bienvenido", Toast.LENGTH_SHORT).show();*/
+        BackgroundWorkerLogin backgroundWorkerLogin = new BackgroundWorkerLogin(this);
+        backgroundWorkerLogin.execute(type,username,password);
 
     }
 }

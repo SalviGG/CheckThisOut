@@ -19,10 +19,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class BackgroundWorker extends AsyncTask<String, Void, String> {
+public class BackgroundWorkerLogin extends AsyncTask<String, Void, String> {
     Context context;
     AlertDialog alertDialog;
-    BackgroundWorker(Context ctx){
+    BackgroundWorkerLogin(Context ctx){
         context = ctx;
     }
 

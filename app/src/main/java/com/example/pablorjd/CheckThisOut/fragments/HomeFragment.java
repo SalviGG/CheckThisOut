@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.example.pablorjd.CheckThisOut.BuildConfig;
 import com.example.pablorjd.CheckThisOut.PaginationAdapter;
 import com.example.pablorjd.CheckThisOut.R;
@@ -54,6 +55,7 @@ public class HomeFragment extends Fragment{
 
     private MovieService movieService;
 
+    RecyclerViewHeader header;
 
 
     @Override
@@ -106,11 +108,13 @@ public class HomeFragment extends Fragment{
 
         loadFirstPage();
 
+        header.attachTo(rv);
 
         return rootView;
     }
 
     private void initUI(View view){
+        header = (RecyclerViewHeader) view.findViewById(R.id.header);
         rv = (RecyclerView) view.findViewById(R.id.main_recycler);
         progressBar = (ProgressBar) view.findViewById(R.id.main_progress);
     }

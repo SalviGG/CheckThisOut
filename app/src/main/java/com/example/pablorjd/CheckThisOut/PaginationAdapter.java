@@ -24,7 +24,7 @@ import java.util.List;
  * Created by Suleiman on 19/10/16.
  */
 
-public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
 
     private static final int ITEM = 0;
     private static final int LOADING = 1;
@@ -34,6 +34,8 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Context context;
 
     private boolean isLoadingAdded = false;
+
+    private View.OnClickListener listenerOnClick;
 
     public PaginationAdapter(Context context) {
         this.context = context;
@@ -62,6 +64,9 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 viewHolder = new LoadingVH(v2);
                 break;
         }
+
+        parent.setOnClickListener(this);
+
         return viewHolder;
     }
 
@@ -194,6 +199,17 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public Result getItem(int position) {
         return movieResults.get(position);
+    }
+
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listenerOnClick = listener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (listenerOnClick != null){
+            listenerOnClick.onClick(view);
+        }
     }
 
 

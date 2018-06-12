@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.example.pablorjd.CheckThisOut.BuildConfig;
@@ -69,6 +70,13 @@ public class HomeFragment extends Fragment{
         rv.setLayoutManager(linearLayoutManager);
 
         rv.setItemAnimator(new DefaultItemAnimator());
+
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Selección de pelicula", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         rv.setAdapter(adapter);
 

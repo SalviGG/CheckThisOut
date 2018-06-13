@@ -1,6 +1,7 @@
 package com.example.pablorjd.CheckThisOut;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,7 +25,7 @@ import java.util.List;
  * Created by Suleiman on 19/10/16.
  */
 
-public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener{
+public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private static final int ITEM = 0;
     private static final int LOADING = 1;
@@ -34,8 +35,6 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Context context;
 
     private boolean isLoadingAdded = false;
-
-    private View.OnClickListener listenerOnClick;
 
     public PaginationAdapter(Context context) {
         this.context = context;
@@ -65,8 +64,6 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 break;
         }
 
-        parent.setOnClickListener(this);
-
         return viewHolder;
     }
 
@@ -86,6 +83,8 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         switch (getItemViewType(position)) {
             case ITEM:
                 final MovieVH movieVH = (MovieVH) holder;
+
+                movieVH.mIdMovie.setText(result.getId().toString());
 
                 movieVH.mMovieTitle.setText(result.getTitle());
 
@@ -201,16 +200,7 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return movieResults.get(position);
     }
 
-    public void setOnClickListener(View.OnClickListener listener){
-        this.listenerOnClick = listener;
-    }
 
-    @Override
-    public void onClick(View view) {
-        if (listenerOnClick != null){
-            listenerOnClick.onClick(view);
-        }
-    }
 
 
    /*
@@ -227,15 +217,25 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         private TextView mYear; // displays "year | language"
         private ImageView mPosterImg;
         private ProgressBar mProgress;
+        private TextView mIdMovie;
 
-        public MovieVH(View itemView) {
+        public MovieVH(final View itemView) {
             super(itemView);
 
+            mIdMovie = (TextView) itemView.findViewById(R.id.etIdMovie);
             mMovieTitle = (TextView) itemView.findViewById(R.id.movie_title);
             mMovieDesc = (TextView) itemView.findViewById(R.id.movie_desc);
             mYear = (TextView) itemView.findViewById(R.id.movie_year);
             mPosterImg = (ImageView) itemView.findViewById(R.id.movie_poster);
             mProgress = (ProgressBar) itemView.findViewById(R.id.movie_progress);
+            mPosterImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, MovieDetail.class);
+                    intent.putExtra("Movie_ID",mIdMovie.getText().toString());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

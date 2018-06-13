@@ -14,6 +14,14 @@
         app:cardCornerRadius="3dp"
         app:cardPreventCornerOverlap="false">
 
+        <EditText
+            android:id="@+id/etIdMovie"
+            android:layout_width="8dp"
+            android:layout_height="6dp"
+            android:ems="10"
+            android:inputType="number"
+            android:visibility="invisible" />
+
         <ProgressBar
             android:id="@+id/movie_progress"
             style="@style/Widget.AppCompat.ProgressBar"

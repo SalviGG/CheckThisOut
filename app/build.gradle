@@ -11,7 +11,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        debug{
+        debug {
             buildConfigField 'String', "ApiKey", MyMovieDBApiKey
             resValue 'string', "api_key", MyMovieDBApiKey
         }

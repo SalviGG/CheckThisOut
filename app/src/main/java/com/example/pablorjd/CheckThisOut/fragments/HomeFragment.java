@@ -21,7 +21,7 @@ import com.example.pablorjd.CheckThisOut.R;
 import com.example.pablorjd.CheckThisOut.api.MovieApi;
 import com.example.pablorjd.CheckThisOut.api.MovieService;
 import com.example.pablorjd.CheckThisOut.model.Result;
-import com.example.pablorjd.CheckThisOut.model.TopRatedMovies;
+import com.example.pablorjd.CheckThisOut.model.Movies;
 import com.example.pablorjd.CheckThisOut.utils.PaginationScrollListener;
 
 import java.util.List;
@@ -29,8 +29,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment{
 
@@ -39,7 +37,7 @@ public class HomeFragment extends Fragment{
     public static int PAGE = 1;
     public static String API_KEY = BuildConfig.ApiKey;
     public static String LANGUAGE = "es-CL";
-    public static String CATEGORY = "top_rated";
+    public static String CATEGORY = "now_playing";
 
     PaginationAdapter adapter;
     LinearLayoutManager linearLayoutManager;
@@ -70,13 +68,6 @@ public class HomeFragment extends Fragment{
         rv.setLayoutManager(linearLayoutManager);
 
         rv.setItemAnimator(new DefaultItemAnimator());
-
-        adapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Selección de pelicula", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         rv.setAdapter(adapter);
 
@@ -111,6 +102,7 @@ public class HomeFragment extends Fragment{
             }
         });
 
+
         //init service and load data
         movieService = MovieApi.getClient().create(MovieService.class);
 
@@ -130,9 +122,9 @@ public class HomeFragment extends Fragment{
     private void loadFirstPage() {
         Log.d(TAG, "loadFirstPage: ");
 
-        callTopRatedMoviesApi().enqueue(new Callback<TopRatedMovies>() {
+        callTopRatedMoviesApi().enqueue(new Callback<Movies>() {
             @Override
-            public void onResponse(Call<TopRatedMovies> call, Response<TopRatedMovies> response) {
+            public void onResponse(Call<Movies> call, Response<Movies> response) {
                 // Got data. Send it to adapter
 
                 List<Result> results = fetchResults(response);
@@ -144,7 +136,7 @@ public class HomeFragment extends Fragment{
             }
 
             @Override
-            public void onFailure(Call<TopRatedMovies> call, Throwable t) {
+            public void onFailure(Call<Movies> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -155,17 +147,17 @@ public class HomeFragment extends Fragment{
      * @param response extracts List<{@link Result>} from response
      * @return
      */
-    private List<Result> fetchResults(Response<TopRatedMovies> response) {
-        TopRatedMovies topRatedMovies = response.body();
-        return topRatedMovies.getResults();
+    private List<Result> fetchResults(Response<Movies> response) {
+        Movies movies = response.body();
+        return movies.getResults();
     }
 
     private void loadNextPage() {
         Log.d(TAG, "loadNextPage: " + currentPage);
 
-        callTopRatedMoviesApi().enqueue(new Callback<TopRatedMovies>() {
+        callTopRatedMoviesApi().enqueue(new Callback<Movies>() {
             @Override
-            public void onResponse(Call<TopRatedMovies> call, Response<TopRatedMovies> response) {
+            public void onResponse(Call<Movies> call, Response<Movies> response) {
                 adapter.removeLoadingFooter();
                 isLoading = false;
 
@@ -177,7 +169,7 @@ public class HomeFragment extends Fragment{
             }
 
             @Override
-            public void onFailure(Call<TopRatedMovies> call, Throwable t) {
+            public void onFailure(Call<Movies> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -190,7 +182,7 @@ public class HomeFragment extends Fragment{
      * As {@link #currentPage} will be incremented automatically
      * by @{@link PaginationScrollListener} to load next page.
      */
-    private Call<TopRatedMovies> callTopRatedMoviesApi() {
+    private Call<Movies> callTopRatedMoviesApi() {
         return movieService.getMovies(
                 CATEGORY,
                 API_KEY,

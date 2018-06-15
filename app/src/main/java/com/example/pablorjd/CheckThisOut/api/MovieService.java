@@ -17,5 +17,4 @@ public interface MovieService {
             @Query("page") int page
     );
 
-
 }

@@ -6,34 +6,67 @@
     android:layout_height="match_parent"
     tools:context="MovieDetail">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/movie_sinopsis_detail"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="105dp"
+            android:layout_height="22dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:maxLines="3"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/movie_desc_detail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.015"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_poster_detail"
+            app:layout_constraintVertical_bias="0.857"
+            tools:text="Sinopsis" />
+
+        <TextView
+            android:id="@+id/movie_desc_detail"
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="360dp"
+            android:layout_height="177dp"
+
+            android:layout_marginBottom="76dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Nowadays, user engagement is considered one of the most important metrics for the success of your app" />
 
         <ImageView
             android:id="@+id/movie_poster_detail"
             android:layout_width="144dp"
             android:layout_height="214dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.035"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_width="203dp"
-            android:layout_height="213dp"
+            android:layout_width="211dp"
+            android:layout_height="71dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/movie_poster_detail"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
                 android:id="@+id/movie_title_detail"
@@ -72,17 +105,6 @@
                 android:textStyle="bold"
                 tools:text="Popularity" />
 
-            <TextView
-                android:id="@+id/movie_desc_detail"
-                style="@style/TextAppearance.AppCompat.Caption"
-                android:layout_width="match_parent"
-                android:layout_height="122dp"
-                android:layout_marginLeft="@dimen/activity_margin_content"
-                android:layout_marginStart="@dimen/activity_margin_content"
-                android:layout_marginTop="@dimen/activity_margin_half"
-                android:ellipsize="end"
-                android:maxLines="6"
-                tools:text="Nowadays, user engagement is considered one of the most important metrics for the success of your app" />
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>

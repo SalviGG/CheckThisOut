@@ -2,10 +2,14 @@ package com.example.pablorjd.CheckThisOut.model;
 
 import java.util.List;
 
+import retrofit2.Call;
+
 public class MovieResults {
+
 
     private int page;
     private int total_results;
+    private DatesBean dates;
     private int total_pages;
     private List<ResultsBean> results;
 
@@ -25,6 +29,14 @@ public class MovieResults {
         this.total_results = total_results;
     }
 
+    public DatesBean getDates() {
+        return dates;
+    }
+
+    public void setDates(DatesBean dates) {
+        this.dates = dates;
+    }
+
     public int getTotal_pages() {
         return total_pages;
     }
@@ -41,22 +53,49 @@ public class MovieResults {
         this.results = results;
     }
 
+
+    public static class DatesBean {
+        /**
+         * maximum : 2018-06-19
+         * minimum : 2018-05-02
+         */
+
+        private String maximum;
+        private String minimum;
+
+        public String getMaximum() {
+            return maximum;
+        }
+
+        public void setMaximum(String maximum) {
+            this.maximum = maximum;
+        }
+
+        public String getMinimum() {
+            return minimum;
+        }
+
+        public void setMinimum(String minimum) {
+            this.minimum = minimum;
+        }
+    }
+
     public static class ResultsBean {
         /**
-         * vote_count : 1562
-         * id : 383498
+         * vote_count : 565
+         * id : 351286
          * video : false
-         * vote_average : 7.9
-         * title : Deadpool 2
-         * popularity : 321.086589
-         * poster_path : /to0spRl1CMDvyUbOnbb4fTk3VAd.jpg
+         * vote_average : 6.7
+         * title : Jurassic World: Fallen Kingdom
+         * popularity : 277.02214
+         * poster_path : /c9XxwwhPHdaImA2f1WEfEsbhaFB.jpg
          * original_language : en
-         * original_title : Deadpool 2
-         * genre_ids : [28,35,878]
-         * backdrop_path : /3P52oz9HPQWxcwHOwxtyrVV1LKi.jpg
+         * original_title : Jurassic World: Fallen Kingdom
+         * genre_ids : [28,12,878]
+         * backdrop_path : /gBmrsugfWpiXRh13Vo3j0WW55qD.jpg
          * adult : false
-         * overview : Wisecracking mercenary Deadpool battles the evil and powerful Cable and other bad guys to save a boy's life.
-         * release_date : 2018-05-15
+         * overview : A volcanic eruption threatens the remaining dinosaurs on the island of Isla Nublar, where the creatures have freely roamed for several years after the demise of an animal theme park known as Jurassic World. Claire Dearing, the former park manager, has now founded the Dinosaur Protection Group, an organization dedicated to protecting the dinosaurs. To help with her cause, Claire has recruited Owen Grady, a former dinosaur trainer who worked at the park, to prevent the extinction of the dinosaurs once again.
+         * release_date : 2018-06-06
          */
 
         private int vote_count;
@@ -185,7 +224,6 @@ public class MovieResults {
         public void setGenre_ids(List<Integer> genre_ids) {
             this.genre_ids = genre_ids;
         }
+
     }
-
-
 }

@@ -11,9 +11,15 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField 'String', "ApiKey", MyMovieDBApiKey
+            resValue 'string', "api_key", MyMovieDBApiKey
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "ApiKey", MyMovieDBApiKey
+            resValue 'string', "api_key", MyMovieDBApiKey
         }
     }
 }
@@ -25,4 +31,15 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
 }

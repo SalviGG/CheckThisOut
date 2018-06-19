@@ -1,92 +1,76 @@
 package com.example.pablorjd.CheckThisOut;
 
-import android.os.StrictMode;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
+import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.pablorjd.CheckThisOut.fragments.HomeFragment;
+import com.example.pablorjd.CheckThisOut.fragments.SettingsFragment;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-public class MainActivity extends AppCompatActivity {
-
-
-    TextView txtTitulo;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+
+        if(savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+            navigationView.setCheckedItem(R.id.home);
+        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
-
-
-        txtTitulo = (TextView)findViewById(R.id.txtTitulo);
+        toggle.syncState();
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.home:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+                break;
+            case R.id.settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
+                break;
+            case R.id.log:
+                Intent intent = new Intent(MainActivity.this, Login.class );
+                startActivity(intent);
+                Toast.makeText(this,"Ha cerrado su sesión", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
-    public void getData(){
-        String sql = "http://www.omdbapi.com/?i=tt3896198&apikey=35e3ba57";
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        URL url = null;
-        HttpURLConnection conn;
-
-        try {
-            url = new URL(sql);
-            conn = (HttpURLConnection) url.openConnection();
-
-            conn.setRequestMethod("GET");
-
-            conn.connect();
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-            String inputLine;
-
-            StringBuffer response = new StringBuffer();
-
-            String json = "";
-
-            while((inputLine = in.readLine()) != null){
-                response.append(inputLine);
-            }
-
-            json = response.toString();
-
-            JSONArray jsonArr = null;
-
-            jsonArr = new JSONArray(json);
-            String mensaje = "";
-            for(int i = 0;i<jsonArr.length();i++){
-                JSONObject jsonObject = jsonArr.getJSONObject(i);
-
-                Log.d("SLIDA",jsonObject.optString("Title"));
-                mensaje += "DESCRIPCION "+i+" "+jsonObject.optString("Title")+"\n";
-            }
-            txtTitulo.setText(mensaje);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
     }
-
-
-
 
 }

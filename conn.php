@@ -1,5 +1,5 @@
 ﻿<?php
-$db_name = "checkthisout";
+$db_name = "checkthisoutbd";
 $mysql_username = "root";
 $mysql_password = "";
 $server_name = "localhost";

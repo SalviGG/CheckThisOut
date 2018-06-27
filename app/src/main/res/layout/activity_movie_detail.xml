@@ -55,6 +55,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="211dp"
             android:layout_height="71dp"
             android:layout_marginBottom="8dp"
@@ -106,6 +107,24 @@
                 tools:text="Popularity" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:background="#4caf50"
+            android:text="Check in"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_poster_detail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toEndOf="@+id/movie_poster_detail"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="0.402" />
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

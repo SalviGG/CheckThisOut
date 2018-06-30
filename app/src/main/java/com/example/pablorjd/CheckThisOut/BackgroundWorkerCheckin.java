@@ -25,21 +25,21 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class BackgroundWorkerLogin extends AsyncTask<String, Void, String> {
+public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
     Context context;
     AlertDialog alertDialog;
-    BackgroundWorkerLogin(Context ctx){
+    BackgroundWorkerCheckin(Context ctx){
         context = ctx;
     }
 
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://10.0.2.2/checkthisout/login.php";
-        if (type.equals("login")){
+        String login_url = "http://10.0.2.2/checkthisout/checkin.php";
+        if (type.equals("checkin")){
             try {
-                String user_name = params[1];
-                String password = params[2];
+                String user_id = params[1];
+                String movie_id = params[2];
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -47,8 +47,8 @@ public class BackgroundWorkerLogin extends AsyncTask<String, Void, String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("user_name", "UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8")+"&"
-                        +URLEncoder.encode("password", "UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+                String post_data = URLEncoder.encode("user_id", "UTF-8")+"="+URLEncoder.encode(user_id,"UTF-8")+"&"
+                        +URLEncoder.encode("movie_id", "UTF-8")+"="+URLEncoder.encode(movie_id,"UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -81,29 +81,11 @@ public class BackgroundWorkerLogin extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
 
-        if (result.length()>3){
-            try {
-                JSONObject jsonObject = new JSONObject(result);
-                JSONArray jsonArray = jsonObject.getJSONArray("user");
-                JSONObject user = jsonArray.getJSONObject(0);
-                String id = user.getString("idUser");
-                String userName = user.getString("username");
-                String email = user.getString("email");
-                String password = user.getString("password");
-                String name = user.getString("name");
-                String lastName = user.getString("lastName");
-                UserSession userSession = new UserSession(context);
-                userSession.setAllSharedPreferences(id, userName, email, password,name,lastName);
+        if (result.equals("Check-in exitoso") ){
+            Intent intent = new Intent(context,MovieDetail.class);
+            context.startActivity(intent);
+            Toast.makeText(context,"Checkin exitoso",Toast.LENGTH_SHORT).show();
 
-
-                Intent intent = new Intent(context,MainActivity.class);
-                context.startActivity(intent);
-                Toast.makeText(context,"Login exitoso",Toast.LENGTH_SHORT).show();
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }else{
             Toast.makeText(context,"Login erroneo",Toast.LENGTH_SHORT).show();
         }

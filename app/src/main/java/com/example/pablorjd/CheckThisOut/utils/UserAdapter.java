@@ -5,17 +5,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.example.pablorjd.CheckThisOut.model.User;
-
 import java.util.List;
 
 public class UserAdapter extends BaseAdapter{
 
     private Context context;
-    private List<User> list;
+    private List<UserSession> list;
     private int layout;
 
-    public UserAdapter(Context context, List<User> list, int layout){
+    public UserAdapter(Context context, List<UserSession> list, int layout){
 
         this.context = context;
         this.list = list;
@@ -30,11 +28,11 @@ public class UserAdapter extends BaseAdapter{
         this.context = context;
     }
 
-    public List<User> getList() {
+    public List<UserSession> getList() {
         return list;
     }
 
-    public void setList(List<User> list) {
+    public void setList(List<UserSession> list) {
         this.list = list;
     }
 

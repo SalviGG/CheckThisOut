@@ -2,6 +2,8 @@ package com.example.pablorjd.CheckThisOut;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,6 +11,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.pablorjd.CheckThisOut.api.MovieServiceDetail;
 import com.example.pablorjd.CheckThisOut.model.MovieResults;
+import com.example.pablorjd.CheckThisOut.utils.UserSession;
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -35,13 +43,24 @@ public class MovieDetail extends AppCompatActivity {
     private TextView sinopsis;
     private ImageView moviePoster;
 
+    private Button btnCheckin;
+
+    private UserSession userSession;
+
+    private String movieID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
-        Bundle datos = this.getIntent().getExtras();
+        userSession = new UserSession(this);
+
+        btnCheckin = (Button)findViewById(R.id.btnCheckin);
+
+        final Bundle datos = this.getIntent().getExtras();
+
         MOVIE_ID = Integer.parseInt(datos.getString("Movie_ID").replaceAll("[\\D]",""));
         title = (TextView)findViewById(R.id.movie_title_detail);
         year = (TextView)findViewById(R.id.movie_year_detail);
@@ -50,6 +69,8 @@ public class MovieDetail extends AppCompatActivity {
         sinopsis = (TextView)findViewById(R.id.movie_sinopsis_detail);
         sinopsis.setText("Sinopsis");
         moviePoster = (ImageView)findViewById(R.id.movie_poster_detail);
+
+        movieID = datos.getString("Movie_ID");
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -85,5 +106,12 @@ public class MovieDetail extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onChekin(View view){
+        String userId = userSession.getId();
+        String type = "checkin";
+        BackgroundWorkerCheckin backgroundWorkerCheckin = new BackgroundWorkerCheckin(this);
+        backgroundWorkerCheckin.doInBackground(type,userId,movieID);
     }
 }

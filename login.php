@@ -1,14 +1,22 @@
-﻿<?php
-require "conn.php";
-$user_name = $_POST["user_name"];
-$user_password = $_POST["password"];
-$mysql_query = "select * from user where username like '$user_name' and password like '$user_password';";
-$result = mysqli_query($conn, $mysql_query);
-if(mysqli_num_rows($result)>0){
-	$val = "0";
-}
-else{
-	$val = "1";
-}
-echo $val;
+<?php
+
+    require "conn.php";
+
+    $user_name = $_POST["user_name"];
+    $password = $_POST["password"];
+
+    try {
+        $conn->beginTransaction();
+        $query= "Select * from user where username = '$user_name' and password = '$password'";
+        $results = $conn->query($query);
+        $conn->commit();
+        $datos = array();
+        foreach ($results as $row) {
+            $datos[]=$row;
+        }
+    } catch (Exception $e){
+        echo $e->getMessage();
+    }
+
+    echo json_encode($datos);
 ?>

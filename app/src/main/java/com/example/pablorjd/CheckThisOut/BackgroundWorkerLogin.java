@@ -29,7 +29,7 @@ public class BackgroundWorkerLogin extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://10.20.13.31/checkthisout/login.php";
+        String login_url = "http://10.0.2.2/checkthisout/login.php";
         if (type.equals("login")){
             try {
                 String user_name = params[1];
@@ -49,15 +49,15 @@ public class BackgroundWorkerLogin extends AsyncTask<String, Void, String> {
                 outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-                String result = "";
-                String line = "";
+                StringBuilder result = new StringBuilder();
+                String line;
                 while ((line = bufferedReader.readLine())!=null){
-                    result += line;
+                    result.append(line).append('\n');
                 }
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
-                return result;
+                return result.toString();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -74,9 +74,9 @@ public class BackgroundWorkerLogin extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        int val = Integer.parseInt(result.replaceAll("[\\D]",""));
+        //int val = Integer.parseInt(result.replaceAll("[\\D]",""));
 
-        if (val == 0){
+        if (result.length() > 0){
             Intent intent = new Intent(context,MainActivity.class);
             context.startActivity(intent);
             Toast.makeText(context,"Login exitoso",Toast.LENGTH_SHORT).show();

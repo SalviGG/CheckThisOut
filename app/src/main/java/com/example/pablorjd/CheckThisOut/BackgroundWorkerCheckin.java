@@ -35,12 +35,13 @@ public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://10.0.2.2/checkthisout/checkin.php";
+        String checkin_url = "http://10.0.2.2/checkthisout/checkin.php";
         if (type.equals("checkin")){
             try {
                 String user_id = params[1];
                 String movie_id = params[2];
-                URL url = new URL(login_url);
+                String movie_name = params[3];
+                URL url = new URL(checkin_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
@@ -48,7 +49,8 @@ public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String post_data = URLEncoder.encode("user_id", "UTF-8")+"="+URLEncoder.encode(user_id,"UTF-8")+"&"
-                        +URLEncoder.encode("movie_id", "UTF-8")+"="+URLEncoder.encode(movie_id,"UTF-8");
+                        +URLEncoder.encode("movie_id", "UTF-8")+"="+URLEncoder.encode(movie_id,"UTF-8")+"&"
+                        +URLEncoder.encode("movie_name","UTF-8")+"="+URLEncoder.encode(movie_name,"UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,8 +14,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,7 +38,7 @@ public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String checkin_url = "http://10.0.2.2/checkthisout/checkin.php";
+        String checkin_url = "http://192.168.1.16/checkthisout/checkin.php";
         if (type.equals("checkin")){
             try {
                 String user_id = params[1];
@@ -46,6 +49,8 @@ public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String post_data = URLEncoder.encode("user_id", "UTF-8")+"="+URLEncoder.encode(user_id,"UTF-8")+"&"
@@ -89,7 +94,7 @@ public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
             Toast.makeText(context,"Checkin exitoso",Toast.LENGTH_SHORT).show();
 
         }else{
-            Toast.makeText(context,"Login erroneo",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Checkin erroneo",Toast.LENGTH_SHORT).show();
         }
     }
 

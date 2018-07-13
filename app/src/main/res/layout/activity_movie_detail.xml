@@ -117,7 +117,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:background="#4caf50"
-            android:onClick="onChekin"
+            android:onClick="onCheckin"
             android:text="Check in"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="@+id/movie_poster_detail"

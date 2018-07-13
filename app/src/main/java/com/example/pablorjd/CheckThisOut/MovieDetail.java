@@ -12,13 +12,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.pablorjd.CheckThisOut.api.MovieServiceDetail;
 import com.example.pablorjd.CheckThisOut.model.MovieResults;
 import com.example.pablorjd.CheckThisOut.utils.UserSession;
-import com.google.gson.JsonArray;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -108,7 +101,7 @@ public class MovieDetail extends AppCompatActivity {
 
     }
 
-    public void onChekin(View view){
+    public void onCheckin(View view){
         String userId = userSession.getId();
         String type = "checkin";
         String movieName = title.getText().toString();

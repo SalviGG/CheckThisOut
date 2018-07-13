@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ import com.example.pablorjd.CheckThisOut.utils.UserSession;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawer;
+    private TextView username;
+    private TextView email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        UserSession userSession =  new UserSession(MainActivity.this);
+        View navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header);
+        username = (TextView)navHeaderView.findViewById(R.id.tvUserName);
+        email = (TextView)navHeaderView.findViewById(R.id.tvEmail);
+        username.setText(userSession.getUserName());
+        email.setText(userSession.getEmail());
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.open, R.string.close);

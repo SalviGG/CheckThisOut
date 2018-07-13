@@ -31,9 +31,10 @@ import java.net.URLEncoder;
 public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
     Context context;
     AlertDialog alertDialog;
-    BackgroundWorkerCheckin(Context ctx){
+    public BackgroundWorkerCheckin(Context ctx){
         context = ctx;
     }
+
 
     @Override
     protected String doInBackground(String... params) {
@@ -70,7 +71,8 @@ public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
                 httpURLConnection.disconnect();
                 return result.toString().replace("\\\"", "\"").replace("\n","").replaceAll("^\"|\"$", "").trim();
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                Log.d("Error outpustream", e.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }

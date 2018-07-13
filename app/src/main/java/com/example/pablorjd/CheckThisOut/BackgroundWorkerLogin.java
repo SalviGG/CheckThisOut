@@ -84,7 +84,7 @@ public class BackgroundWorkerLogin extends AsyncTask<String, Void, String> {
         if (result.length()>3){
             try {
                 JSONObject jsonObject = new JSONObject(result);
-                JSONArray jsonArray = jsonObject.getJSONArray("user");
+                JSONArray jsonArray = jsonObject.getJSONArray("users");
                 JSONObject user = jsonArray.getJSONObject(0);
                 String id = user.getString("idUser");
                 String userName = user.getString("username");

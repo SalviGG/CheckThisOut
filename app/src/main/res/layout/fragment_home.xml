@@ -43,12 +43,6 @@
                 android:layout_marginStart="14dp"
                 android:text="En cines" />
 
-            <SearchView
-                android:layout_width="293dp"
-                android:layout_height="29dp"
-                android:layout_alignStart="@+id/textView"
-                android:layout_centerVertical="true" />
-
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
@@ -56,6 +50,27 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/textView"
                 android:text="Buscar" />
+
+            <Button
+                android:id="@+id/btnBuscar"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="34dp"
+                android:background="#4caf50"
+                android:text="Buscar"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:hint="Nombre de pelicula"
+                android:inputType="textPersonName" />
 
         </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 

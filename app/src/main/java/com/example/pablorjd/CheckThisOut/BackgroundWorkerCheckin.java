@@ -89,7 +89,8 @@ public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
 
         if (result.equals("Check-in exitoso") ){
-            Toast.makeText(context,"Checkin exitoso",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context,Confirm.class);
+            context.startActivity(intent);
 
         }else{
             Toast.makeText(context,"Checkin erroneo",Toast.LENGTH_SHORT).show();

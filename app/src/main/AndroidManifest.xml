@@ -25,7 +25,8 @@
         </activity>
         <activity android:name=".Login" />
         <activity android:name=".MovieDetail" />
-        <activity android:name=".BusquedaMovies"></activity>
+        <activity android:name=".BusquedaMovies" />
+        <activity android:name=".Confirm"></activity>
     </application>
 
 </manifest>

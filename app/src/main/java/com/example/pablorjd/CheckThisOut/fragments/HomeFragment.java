@@ -1,5 +1,6 @@
 package com.example.pablorjd.CheckThisOut.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.example.pablorjd.CheckThisOut.BuildConfig;
+import com.example.pablorjd.CheckThisOut.BusquedaMovies;
 import com.example.pablorjd.CheckThisOut.PaginationAdapter;
 import com.example.pablorjd.CheckThisOut.R;
 import com.example.pablorjd.CheckThisOut.api.MovieApi;
@@ -115,6 +117,17 @@ public class HomeFragment extends Fragment{
 
         header.attachTo(rv);
 
+
+        btnBusqueda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), BusquedaMovies.class);
+                intent.putExtra("busqueda",etbusqueda.getText().toString());
+                getContext().startActivity(intent);
+            }
+        });
+
+
         return rootView;
     }
 
@@ -122,6 +135,8 @@ public class HomeFragment extends Fragment{
         header = (RecyclerViewHeader) view.findViewById(R.id.header);
         rv = (RecyclerView) view.findViewById(R.id.main_recycler);
         progressBar = (ProgressBar) view.findViewById(R.id.main_progress);
+        etbusqueda = (EditText) view.findViewById(R.id.etBusqueda);
+        btnBusqueda = (Button) view.findViewById(R.id.btnBuscar);
     }
 
     private void loadFirstPage() {

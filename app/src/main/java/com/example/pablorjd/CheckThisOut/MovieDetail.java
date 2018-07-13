@@ -111,8 +111,8 @@ public class MovieDetail extends AppCompatActivity {
     public void onChekin(View view){
         String userId = userSession.getId();
         String type = "checkin";
-        String movieName = "Deadpool 2";
+        String movieName = title.getText().toString();
         BackgroundWorkerCheckin backgroundWorkerCheckin = new BackgroundWorkerCheckin(this);
-        backgroundWorkerCheckin.doInBackground(type,userId,movieID,movieName);
+        backgroundWorkerCheckin.execute(type,userId,movieID,movieName);
     }
 }

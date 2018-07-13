@@ -38,7 +38,7 @@ public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String checkin_url = "http://192.168.1.16/checkthisout/checkin.php";
+        String checkin_url = "http://10.0.2.2/checkthisout/checkin.php";
         if (type.equals("checkin")){
             try {
                 String user_id = params[1];
@@ -89,8 +89,6 @@ public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
 
         if (result.equals("Check-in exitoso") ){
-            Intent intent = new Intent(context,MovieDetail.class);
-            context.startActivity(intent);
             Toast.makeText(context,"Checkin exitoso",Toast.LENGTH_SHORT).show();
 
         }else{

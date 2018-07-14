@@ -4,20 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.StrictMode;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.pablorjd.CheckThisOut.utils.UserSession;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,22 +19,25 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
+public class BackgroundWorkerRegister extends AsyncTask<String, Void, String> {
+
     Context context;
-    public BackgroundWorkerCheckin(Context ctx){
+    public BackgroundWorkerRegister(Context ctx){
         context = ctx;
     }
 
-
     @Override
     protected String doInBackground(String... params) {
+
         String type = params[0];
-        String checkin_url = "http://10.0.2.2/checkthisout/checkin.php";
-        if (type.equals("checkin")){
+        String checkin_url = "http://10.0.2.2/checkthisout/register.php";
+        if (type.equals("register")){
             try {
-                String user_id = params[1];
-                String movie_id = params[2];
-                String movie_name = params[3];
+                String user_name = params[1];
+                String nombre = params[2];
+                String apellido = params[3];
+                String password = params[4];
+                String email = params[5];
                 URL url = new URL(checkin_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -51,9 +45,11 @@ public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("user_id", "UTF-8")+"="+URLEncoder.encode(user_id,"UTF-8")+"&"
-                        +URLEncoder.encode("movie_id", "UTF-8")+"="+URLEncoder.encode(movie_id,"UTF-8")+"&"
-                        +URLEncoder.encode("movie_name","UTF-8")+"="+URLEncoder.encode(movie_name,"UTF-8");
+                String post_data = URLEncoder.encode("user_name", "UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8")+"&"
+                        +URLEncoder.encode("name", "UTF-8")+"="+URLEncoder.encode(nombre,"UTF-8")+"&"
+                        +URLEncoder.encode("last_name","UTF-8")+"="+URLEncoder.encode(apellido,"UTF-8")+"&"
+                        +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8")+"&"
+                        +URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(email,"UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -80,25 +76,16 @@ public class BackgroundWorkerCheckin extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected void onPreExecute() {
-
-    }
-
-    @Override
     protected void onPostExecute(String result) {
 
-        if (result.equals("Check-in exitoso") ){
-            Intent intent = new Intent(context,Confirm.class);
+        if (result.equals("user registered") ){
+            Intent intent = new Intent(context,Login.class);
             context.startActivity(intent);
+            Toast.makeText(context,"Usuario registrado correctamente",Toast.LENGTH_LONG).show();
 
         }else{
-            Toast.makeText(context,"Checkin erroneo",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,result + ". Elija otro nombre de usuario",Toast.LENGTH_LONG).show();
         }
-    }
 
-
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
     }
 }

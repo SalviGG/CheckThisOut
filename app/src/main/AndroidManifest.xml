@@ -26,7 +26,8 @@
         <activity android:name=".Login" />
         <activity android:name=".MovieDetail" />
         <activity android:name=".BusquedaMovies" />
-        <activity android:name=".Confirm"></activity>
+        <activity android:name=".Confirm" />
+        <activity android:name=".RegistrarUsuario"></activity>
     </application>
 
 </manifest>

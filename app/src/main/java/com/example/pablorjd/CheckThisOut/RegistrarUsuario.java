@@ -36,14 +36,18 @@ public class RegistrarUsuario extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (checkCampos()){
-                    String username = etRegUsuario.getText().toString();
-                    String nombre = etRegNombre.getText().toString();
-                    String apellido = etRegApellido.getText().toString();
-                    String password = etRegPassword.getText().toString();
-                    String email = etRegEmail.getText().toString();
-                    String type = "register";
-                    BackgroundWorkerRegister backgroundWorkerRegister = new BackgroundWorkerRegister(RegistrarUsuario.this);
-                    backgroundWorkerRegister.execute(type,username,nombre,apellido,password,email);
+                    if (validaciones().equals("")){
+                        String username = etRegUsuario.getText().toString();
+                        String nombre = etRegNombre.getText().toString();
+                        String apellido = etRegApellido.getText().toString();
+                        String password = etRegPassword.getText().toString();
+                        String email = etRegEmail.getText().toString();
+                        String type = "register";
+                        BackgroundWorkerRegister backgroundWorkerRegister = new BackgroundWorkerRegister(RegistrarUsuario.this);
+                        backgroundWorkerRegister.execute(type,username,nombre,apellido,password,email);
+                    }else{
+                        Toast.makeText(RegistrarUsuario.this,validaciones(),Toast.LENGTH_LONG).show();
+                    }
                 }else{
                     Toast.makeText(RegistrarUsuario.this,"Hay campos sin rellenar, por favor ingrese todos los datos",Toast.LENGTH_LONG).show();
                 }
@@ -89,6 +93,29 @@ public class RegistrarUsuario extends AppCompatActivity {
 
 
         return false;
+    }
+
+    private String validaciones(){
+
+        String val = "";
+        if (etRegUsuario.getText().toString().length()<=2){
+            val += "Largo de usuario muy corto "+"\n";
+        }
+        if (etRegPassword.getText().toString().length()<=3){
+            val += "Largo de contraseña muy corto "+"\n";
+        }
+        if (etRegNombre.getText().toString().length()<=2){
+            val += "Largo de nombre muy corto "+"\n";
+        }
+        if (etRegApellido.getText().toString().length()<=3){
+            val += "Largo de apellido muy corto "+"\n";
+        }
+        if (etRegEmail.getText().toString().length()<=6){
+            val += "Largo de email muy corto "+"\n";
+        }
+
+        return val;
+
     }
 
 }

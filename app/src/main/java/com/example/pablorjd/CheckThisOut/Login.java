@@ -39,6 +39,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void onLogin(View view){
+
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
         String type = "login";
@@ -46,5 +47,6 @@ public class Login extends AppCompatActivity {
         backgroundWorkerLogin.execute(type,username,password);
         etUsername.setText("");
         etPassword.setText("");
+
     }
 }

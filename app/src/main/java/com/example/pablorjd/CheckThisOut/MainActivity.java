@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
                 break;
             case R.id.log:
+                UserSession userSession = new UserSession(this);
+                userSession.cleanSharedPreferences();
                 Intent intent = new Intent(MainActivity.this, Login.class );
                 startActivity(intent);
                 Toast.makeText(this,"Ha cerrado su sesión", Toast.LENGTH_SHORT).show();
@@ -85,5 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
+
 
 }

@@ -78,7 +78,7 @@ public class BackgroundWorkerRegister extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
 
-        if (result.equals("user registered") ){
+        if (result.equals("Usuario registrado correctamente") ){
             Intent intent = new Intent(context,Login.class);
             context.startActivity(intent);
             Toast.makeText(context,"Usuario registrado correctamente",Toast.LENGTH_LONG).show();
